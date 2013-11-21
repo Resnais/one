@@ -7,14 +7,12 @@
 package lv.valdis.warehouse;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 
 /**
  *
@@ -22,10 +20,10 @@ import javax.persistence.OneToMany;
  */
 @Entity
 @NamedQueries({
-   @NamedQuery(name = "User.findAll", query = "SELECT OBJECT(usr) FROM User usr") 
+   @NamedQuery(name = "User.findAll", query = "SELECT OBJECT(usr) FROM SystemUser usr") 
 })
-public class User implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class SystemUser implements Serializable{
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -34,8 +32,8 @@ public class User implements Serializable {
     private String surname;
     private String phone;
     
-    @OneToMany
-    private ArrayList<Purchase> purchase;
+    //@OneToMany
+    //private List<Purchase> purchase;
     
 
     public String getName() {
@@ -71,22 +69,15 @@ public class User implements Serializable {
     }
 
     public Boolean isAdmin() {
-        return admin;
+        return isadmin;
     }
 
     public void setAdmin(Boolean admin) {
-        this.admin = admin;
+        this.isadmin = admin;
     }
 
-    public ArrayList<Purchase> getPurchase() {
-        return purchase;
-    }
-
-    public void setPurchase(ArrayList<Purchase> purchase) {
-        this.purchase = purchase;
-    }
     private String email;
-    private Boolean admin;
+    private Boolean isadmin;
 
     
     
@@ -109,16 +100,24 @@ public class User implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof User)) {
+        if (!(object instanceof SystemUser)) {
             return false;
         }
-        User other = (User) object;
+        SystemUser other = (SystemUser) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
     }
+/*
+    public List<Purchase> getPurchase() {
+        return purchase;
+    }
 
+    public void setPurchase(List<Purchase> purchase) {
+        this.purchase = purchase;
+    }
+*/
     @Override
     public String toString() {
         return "lv.valdis.warehouse.User[ id=" + id + " ]";

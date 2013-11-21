@@ -6,13 +6,14 @@
 
 package lv.valdis.warehouse;
 
-import javax.ejb.Local;
+
+import javax.ejb.Remote;
 
 /**
  *
  * @author Valdis
  */
-@Local
+@Remote
 public interface UserSessionBeanLocal {
  
 boolean logIn(String name, String surname);
